@@ -1,0 +1,15 @@
+.card-img{
+    margin-top: 10px;
+    margin-left: 8px;
+}
+
+.card-body{
+    margin-left: 8px;
+    color:black;
+}
+
+.card-text{
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
