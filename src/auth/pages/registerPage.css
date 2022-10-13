@@ -1,4 +1,4 @@
-.login_container {
+.register_container {
     display: grid;
     grid-template-columns: repeat(1, 1fr);
     width: 100%;
@@ -9,9 +9,9 @@
     justify-items: center;
     background-color: rgb(20, 19, 19);
     color: white
-  } 
+} 
     
-  .login_container_form {
+.register_container_form {
     background-color: rgba(0,0,0,.75);
     box-sizing: border-box;
     display: flex;
@@ -27,18 +27,18 @@
     width: 100%;    
     padding: 60px 68px 40px;
     box-shadow: rgba(0, 0, 0, 0.45) 0px 25px 20px -20px;
-  }
+}
   
-  .login_container_form h2 {
+.register_container_form h2 {
     color: #fff;
     text-align: center;
     font-size: 32px;
     font-weight: 700;
     margin-bottom: 28px;
     padding: 0;
-  }
+}
   
-  .login_container_form input {
+.register_container_form input {
     padding: 8px 16px;
     margin-top: 8px;
     max-width: 100%; 
@@ -47,25 +47,20 @@
     color:black;   
     border-bottom: 0.1rem solid white;
     border-radius: 1rem;
-  }
+}
   
-  .login_container_form button {
-    border-radius: 1rem;
-    font-size: 1.5rem;
+.register_container_form button {
+    border-radius: 4px;
+    font-size: 16px;
     font-weight: 700;
     margin: 24px 0 12px;
     font-size: 18px;
-    padding: 1rem;  
-    border: none;
-    transition: background-color 1s;
+    padding: 16px;  
     background: #e50914;
-    width: 75%; 
-    text-align: center;  
-    border-bottom: 0.1rem solid #f93239;  
-    color: #fff;    
-  }
+    width: 100%;         
+}
 
-  .login-button {
+.register-button {
     border-radius: 1rem;
     font-size: 1.5rem;
     font-weight: 700;    
@@ -80,37 +75,33 @@
     color: #fff; 
   }
   
-  .login_container_form button:hover {
+.register_container_form button:hover {
     background-color: #f93239;
-    color: #000;
     transition: background-color 1s;
-  }
+}
 
-  input.error {
+input.error {
     background-color: #ff0000;
     color: #fff;
     transition: background-color 1s, color 1s;
-  }
+}
   
-  input.error::placeholder {
+input.error::placeholder {
     color: #fff;
     transition: color 1s;
-  }
+}
   
-  @media only screen and (min-width: 540px) {   
+@media only screen and (min-width: 540px) {   
   
-    .login_container_form {      
+    .register_container_form {      
       border-radius: 5rem;
       border-top: 3rem;
       width: 50rem;
     }
-  }
+}
 
-  .image-background{
+.image-background{
     background-image: url('../../image/comic.jpg');
     min-width: 100%;
     min-height: 100%;
-  }
-
-  
-  
+}
