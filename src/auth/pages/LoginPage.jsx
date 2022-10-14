@@ -72,8 +72,7 @@ export const LoginPage = () => {
       return setAlert(true);
     }
     console.log(email);
-    console.log(password);
-    debugger;
+    console.log(password);    
     startLoginWithEmailPassword("checking", email, password);
   };
 
