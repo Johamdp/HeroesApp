@@ -61,13 +61,13 @@ export const RegisterPage = () => {
     e.preventDefault();
 
     setFormSubmited(true);
-    debugger;
+    
     if (!isFormValid) {
-      debugger;
+      
       onResetForm();
       return setAlert(true);
     }
-    debugger;
+   
     startCreatingUserWithEmail("checking", formState);
   };
 
