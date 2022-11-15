@@ -1,48 +1,115 @@
-import React, { useReducer } from 'react'
+import React, { useEffect, useReducer } from 'react'
+import { useLocation } from "react-router-dom";
+import {
+    loginWithEmailPassword,
+    logoutFirebase,
+    registerUserWithEmail,
+    signInWithGoogle,
+} from "../../firebase/providers";
 import { types } from '../types/types'
 import { AuthContext } from './AuthContext'
 import { authReducer } from './authReducer'
 
 const initialState = {
-    logged:false,
-    user:null,
-}
-
-const init = () => {
-    const user = JSON.parse(localStorage.getItem('user'))
-
-    return{
-        logged: !!user,
-        user: user,
-    }
+  logged: "checking",
+  formSubmited: false,
+  alert: false,
+  uid: null,
+  email: null,
+  displayName: null,
+  photoURL: null,
+  errorMessage: null,
 }
 
 export const AuthProvider = ({children}) => {
 
-    const [authState, dispatch] = useReducer(authReducer, initialState, init);
+    const [authState, dispatch] = useReducer(authReducer, initialState);
 
-    const login = (username ='') =>{
-        const user={
-            id:'ABC123',
-            username: username,
-        }
+    const location = useLocation();
 
-        localStorage.setItem('user', JSON.stringify(user))
+    const login = (payload) => {
+      dispatch({ type: types.login, payload: payload });
+    };
 
-        dispatch({
-            type: types.login,
-            payload: user
-        })
-    }
+    const logout = async (payload) => {
+      await logoutFirebase();
+      dispatch({ type: types.logout, payload: payload });
+    };
 
-    const logout = () => {
-        dispatch({type: types.logout})
-        localStorage.removeItem('user');
-    }
+    const checkingAuthentication = async (status) => {
+      dispatch({ type: types.checkingCredentials, payload: status });
+    };
 
-  return (
-    <AuthContext.Provider value={{...authState, login, logout}}>
+    const startGoogleSignIn = async (status) => {
+      dispatch({ type: types.checkingCredentials, payload: status });
+
+      const result = await signInWithGoogle();
+
+      if (!result.ok) return logout(result);
+
+      login(result);
+    };
+
+    const startCreatingUserWithEmail = async (
+      status,
+      { email, password, username }
+    ) => {
+       dispatch({ type: types.checkingCredentials, payload: status });
+
+       const result = await registerUserWithEmail(email, password, username);
+        
+       if (!result.ok) return logout(result);
+
+       login(result);
+     };
+
+    const startLoginWithEmailPassword = async (status, email, password) => {
+      dispatch({ type: types.checkingCredentials, payload: status });
+      debugger;
+      const result = await loginWithEmailPassword(email, password);
+      debugger;
+      console.log(result);
+      if (!result.ok) return logout(result);
+
+      login(result);
+    };
+
+    const startLogOutWithButton = async () => {
+      const result = await logoutFirebase();
+
+      logout(result);
+    };
+
+    const setFormSubmited = (bl) => {
+      dispatch({ type: types.setFormSubmited, payload: bl });
+    };
+
+    const setAlert = (bl) => {
+      dispatch({ type: types.setAlert, payload: bl });
+    };
+    
+    useEffect(() => {
+        setFormSubmited(false);
+        setAlert(false);
+      }, [location]);
+
+
+    return (
+      <AuthContext.Provider 
+            value={{
+                ...authState,
+                setFormSubmited,
+                setAlert,
+                checkingAuthentication,
+                startGoogleSignIn,
+                login,
+                logout,
+                startCreatingUserWithEmail,
+                startLoginWithEmailPassword,
+                startLogOutWithButton,
+            }}
+        >
         {children}
-    </AuthContext.Provider>
-  )
+      </AuthContext.Provider>
+    )
 }

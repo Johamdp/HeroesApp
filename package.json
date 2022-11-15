@@ -11,16 +11,20 @@
   "dependencies": {
     "@chakra-ui/accordion": "^2.0.10",
     "@chakra-ui/react": "^2.2.8",
-    "@emotion/react": "^11.10.0",
-    "@emotion/styled": "^11.10.0",
+    "@emotion/react": "^11.10.4",
+    "@emotion/styled": "^11.10.4",
     "@iconscout/react-unicons": "^1.1.6",
+    "@mui/icons-material": "^5.10.3",
+    "@mui/material": "^5.10.5",    
     "animate.css": "^4.1.1",
+    "firebase": "^9.9.4",
     "framer-motion": "^7.2.0",
     "query-string": "^7.1.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.4.0",
-    "react-router-dom": "6"
+    "react-router-dom": "6",
+    "styled-components": "^5.3.5"
   },
   "devDependencies": {
     "@types/react": "^18.0.15",
